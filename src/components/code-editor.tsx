@@ -1,19 +1,44 @@
+import './code-editor.css';
 import MonacoEditor, { EditorDidMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
+import { parse } from '@babel/parser';
 import { useRef } from 'react';
-import './code-editor.css';
+import traverse from '@babel/traverse';
+import MonacoJSXHighlighter from 'monaco-jsx-highlighter';
 
 interface CodeEditorProps {
   initialValue: string;
   onChange(value: string): void;
 }
 
+// Minimal Babel setup for React JSX parsing:
+const babelParse = (code: string) =>
+  parse(code, {
+    sourceType: 'module',
+    plugins: ['jsx'],
+  });
+
 const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
   const editorRef = useRef<any>();
 
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
     editorRef.current = monacoEditor;
+
+    // Instantiate the highlighter
+    const monacoJSXHighlighter = new MonacoJSXHighlighter(
+      // @ts-ignore
+      window.monaco,
+      babelParse,
+      traverse,
+      monacoEditor,
+    );
+
+    // Activate highlighting (debounceTime default: 100ms)
+    monacoJSXHighlighter.highLightOnDidChangeModelContent();
+    // Activate JSX commenting
+    monacoJSXHighlighter.addJSXCommentCommand();
+
     monacoEditor.onDidChangeModelContent(() => {
       onChange(getValue());
     });
