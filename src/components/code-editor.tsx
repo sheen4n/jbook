@@ -3,7 +3,7 @@ import MonacoEditor, { EditorDidMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
 import { parse } from '@babel/parser';
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
 import traverse from '@babel/traverse';
 import MonacoJSXHighlighter from 'monaco-jsx-highlighter';
 
@@ -19,7 +19,7 @@ const babelParse = (code: string) =>
     plugins: ['jsx'],
   });
 
-const CodeEditor: React.FC<CodeEditorProps> = ({ onChange, initialValue }) => {
+const CodeEditor: FC<CodeEditorProps> = ({ onChange, initialValue }) => {
   const editorRef = useRef<any>();
 
   const onEditorDidMount: EditorDidMount = (getValue, monacoEditor) => {
