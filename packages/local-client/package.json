@@ -1,5 +1,5 @@
 {
-  "name": "local-client",
+  "name": "@sheen4n-jsnote/local-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

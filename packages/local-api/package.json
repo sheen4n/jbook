@@ -1,5 +1,5 @@
 {
-  "name": "local-api",
+  "name": "@sheen4n-jsnote/local-api",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,6 +16,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "http-proxy-middleware": "^2.0.0",
-    "local-client": "^0.1.0"
+    "@sheen4n-jsnote/local-client": "^0.1.0"
   }
 }
