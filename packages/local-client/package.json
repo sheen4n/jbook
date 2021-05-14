@@ -1,6 +1,6 @@
 {
   "name": "@sheen4n-jsnote/local-client",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "devDependencies": {
     "@babel/parser": "^7.13.16",
     "@babel/traverse": "^7.13.17",

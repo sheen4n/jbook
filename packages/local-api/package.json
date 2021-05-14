@@ -9,10 +9,10 @@
     "prepublishOnly": "tsc"
   },
   "dependencies": {
+    "@sheen4n-jsnote/local-client": "^1.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "http-proxy-middleware": "^2.0.0",
-    "@sheen4n-jsnote/local-client": "^0.1.0"
+    "http-proxy-middleware": "^2.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
