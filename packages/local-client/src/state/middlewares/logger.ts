@@ -1,19 +1,18 @@
 // SNA = Store, Next, Action
 
 import { Dispatch } from 'react';
-import { Action } from '../actions';
-import { RootState } from '../reducers';
+import { RootActions, RootState } from '../index';
 
 export const logger = ({
   dispatch,
   getState,
 }: {
-  dispatch: Dispatch<Action>;
+  dispatch: Dispatch<RootActions>;
   getState: () => RootState;
-}) => (next: (action: Action) => void) => (action: Action) => {
+}) => (next: (action: RootActions) => void) => (action: RootActions) => {
   // console.log('logging to params:', params.destination);
-  console.log('store', getState); // Just to see what is in pseudo store
-  // console.log('next', next); // See what is next
-  console.log('action', action); // See what is the action and payload
+  // console.log('store', getState()); // Just to see what is in pseudo store
+  // // console.log('next', next); // See what is next
+  // console.log('action', action); // See what is the action and payload
   return next(action); // calls next, if is last middleware ,next = reducer
 };

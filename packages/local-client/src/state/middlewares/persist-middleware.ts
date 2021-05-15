@@ -1,28 +1,23 @@
-import { ActionType } from './../action-types/index';
 import { Dispatch } from 'redux';
-import { Action } from '../actions';
-import { saveCells } from '../action-creators';
-import { RootState } from '../reducers';
+import { RootActions, RootState } from '../index';
+import { cellDeleted, cellInsertedAfter, cellMoved, cellUpdated, saveCells } from '../cells';
 
 export const persistMiddleware = ({
   dispatch,
   getState,
 }: {
-  dispatch: Dispatch<Action>;
+  dispatch: Dispatch<RootActions>;
   getState: () => RootState;
 }) => {
   let timer: any;
 
-  return (next: (action: Action) => void) => (action: Action) => {
+  return (next: (action: RootActions) => void) => (action: RootActions) => {
     next(action);
 
     if (
-      [
-        ActionType.MOVE_CELL,
-        ActionType.UPDATE_CELL,
-        ActionType.INSERT_CELL_AFTER,
-        ActionType.DELETE_CELL,
-      ].includes(action.type)
+      [cellMoved.type, cellUpdated.type, cellInsertedAfter.type, cellDeleted.type].includes(
+        action.type,
+      )
     ) {
       if (timer) clearTimeout(timer);
 

@@ -1,8 +1,8 @@
 import { FC, useState, useEffect, useRef } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import './text-editor.css';
-import { Cell } from '../state';
-import { useActions } from '../hooks/use-actions';
+import { Cell, cellUpdated } from '../state/cells';
+import { useAppDispatch } from '../hooks/use-app-dispatch';
 
 interface TextEditorProps {
   cell: Cell;
@@ -11,7 +11,7 @@ interface TextEditorProps {
 const TextEditor: FC<TextEditorProps> = ({ cell }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [editing, setEditing] = useState(false);
-  const { updateCell } = useActions();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
@@ -32,7 +32,10 @@ const TextEditor: FC<TextEditorProps> = ({ cell }) => {
   if (editing) {
     return (
       <div className='text-editor' ref={ref}>
-        <MDEditor value={cell.content} onChange={(v) => updateCell(cell.id, v || '')} />
+        <MDEditor
+          value={cell.content}
+          onChange={(v) => dispatch(cellUpdated({ id: cell.id, content: v || '' }))}
+        />
       </div>
     );
   }

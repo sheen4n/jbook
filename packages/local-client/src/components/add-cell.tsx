@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { useActions } from '../hooks/use-actions';
+import { useAppDispatch } from '../hooks/use-app-dispatch';
+import { cellInsertedAfter } from '../state/cells';
 import './add-cell.css';
 
 interface AddCellProps {
@@ -8,13 +9,13 @@ interface AddCellProps {
 }
 
 const AddCell: FC<AddCellProps> = ({ previousCellId, forceVisible = false }) => {
-  const { insertCellAfter } = useActions();
+  const dispatch = useAppDispatch();
   return (
     <div className={`add-cell ${forceVisible && 'force-visible'}`}>
       <div className='add-buttons'>
         <button
           className='button is-rounded is-primary is-small'
-          onClick={() => insertCellAfter(previousCellId, 'code')}
+          onClick={() => dispatch(cellInsertedAfter({ id: previousCellId, type: 'code' }))}
         >
           <span className='icon is-small'>
             <i className='fas fa-plus'></i>
@@ -23,7 +24,7 @@ const AddCell: FC<AddCellProps> = ({ previousCellId, forceVisible = false }) => 
         </button>
         <button
           className='button is-rounded is-primary is-small'
-          onClick={() => insertCellAfter(previousCellId, 'text')}
+          onClick={() => dispatch(cellInsertedAfter({ id: previousCellId, type: 'text' }))}
         >
           <span className='icon is-small'>
             <i className='fas fa-plus'></i>

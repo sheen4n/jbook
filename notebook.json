@@ -1,1 +1,1 @@
-[{"content":"","type":"code","id":"jhocy"},{"content":"","type":"code","id":"nko3z"},{"content":"","type":"code","id":"cucwy"},{"content":"","type":"text","id":"p4jgs"},{"content":"","type":"text","id":"gsvlv"},{"content":"","type":"text","id":"7wb3q"},{"content":"","type":"text","id":"rbidb"}]
+[{"content":"const App = () => {\n  return <h1>hello</h1>;\n};\n\nshow(<App/>)","type":"code","id":"yro7z"}]

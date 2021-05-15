@@ -3,28 +3,29 @@ import { useEffect } from 'react';
 import CodeEditor from './code-editor';
 import Preview from './preview';
 import Resizable from './resizable';
-import { Cell } from '../state';
-import { useActions } from '../hooks/use-actions';
+import { Cell, cellUpdated } from '../state/cells';
 import { useTypedSelector } from '../hooks/use-typed-selector';
 import './code-cell.css';
 import { useCumulativeCode } from '../hooks/use-cumulative-code';
+import { useAppDispatch } from '../hooks/use-app-dispatch';
+import { createBundle } from '../state/bundles';
 interface CodeCellProps {
   cell: Cell;
 }
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  const { updateCell, createBundle } = useActions();
+  const dispatch = useAppDispatch();
   const bundle = useTypedSelector((state) => state.bundles[cell.id]);
 
   const cumulativeCode = useCumulativeCode(cell.id);
 
   useEffect(() => {
     if (!bundle) {
-      createBundle(cell.id, cumulativeCode);
+      createBundle(cell.id, cumulativeCode)(dispatch);
     }
 
     const timer = setTimeout(async () => {
-      createBundle(cell.id, cumulativeCode);
+      createBundle(cell.id, cumulativeCode)(dispatch);
     }, 750);
 
     return () => {
@@ -38,7 +39,7 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
       <div style={{ height: 'calc(100% - 10px)', display: 'flex', flexDirection: 'row' }}>
         <Resizable direction='horizontal'>
           <CodeEditor
-            onChange={(value) => updateCell(cell.id, value)}
+            onChange={(value) => dispatch(cellUpdated({ id: cell.id, content: value }))}
             initialValue={cell.content}
           />
         </Resizable>
