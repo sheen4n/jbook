@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useAppDispatch } from '../hooks/use-app-dispatch';
-import { cellInsertedAfter } from '../state/cells';
+import { cellInsertedAfter } from '../store/cells';
 import './add-cell.css';
 
 interface AddCellProps {

@@ -2,7 +2,7 @@ import ActionBar from './action-bar';
 import CodeCell from './code-cell';
 import TextEditor from './text-editor';
 import './cell-list-item.css';
-import { Cell } from '../state/cells';
+import { Cell } from '../store/cells';
 
 interface CellListItemProps {
   cell: Cell;

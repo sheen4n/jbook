@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from 'react';
 import { useAppDispatch } from '../hooks/use-app-dispatch';
 import { useTypedSelector } from '../hooks/use-typed-selector';
-import { fetchCells } from '../state/cells';
+import { fetchCells } from '../store/cells';
 import AddCell from './add-cell';
 import CellListItem from './cell-list-item';
 import './cell-list.css';

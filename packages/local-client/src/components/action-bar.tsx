@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { cellDeleted, cellMoved } from '../state/cells';
+import { cellDeleted, cellMoved } from '../store/cells';
 import './action-bar.css';
 
 interface ActionBarProps {
